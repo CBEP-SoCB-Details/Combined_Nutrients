@@ -234,8 +234,6 @@ surface_data <- surface_data %>%
          short_name = factor(short_name, levels = levels(surface_results$short_name)))
 ```
 
-
-
 ```{r region_graphic_setup, fig.height = 5, fig.width = 4}
 plt <- surface_data %>%
   filter(parameter == 'TN') %>%
@@ -258,19 +256,20 @@ plt <- surface_data %>%
         legend.key.height = unit(5, 'pt'),
         plot.margin  = unit(c(8,24,8,8), 'pt'),
         plot.title = element_text(hjust = 0.5)) +
-  labs(title = 'DEP and FOCB Data\n2015-2019')
-```
+  labs(title = 'DEP and FOCB Data\n2015-2019') +
 
-```{r tn_graphic_region_legend, fig.height = 5, fig.width = 4}
-plt +
   geom_vline(xintercept = 0.32, color = cbep_colors()[3], lty = 2) +
-  geom_text(aes(x = 0.35, y = 1, label = '0.32'), 
+  geom_text(aes(x = 0.35, y = 15, label = '0.32'), 
             angle = 90, hjust = 0, size = 3,
                 color = cbep_colors()[3]) +
   geom_vline(xintercept = 0.45, color = cbep_colors()[3], lty = 2) +
-  geom_text(aes(x = 0.48, y = 1, label = '0.45'), 
+  geom_text(aes(x = 0.48, y = 15, label = '0.45'), 
             angle = 90, hjust = 0, size = 3,
-                color = cbep_colors()[3]) +
+                color = cbep_colors()[3])
+```
+
+```{r tn_graphic_region_legend, fig.height = 5, fig.width = 4}
+plt
 
 ggsave('figures/tn_by_site_by_region_no_labels.pdf', device = cairo_pdf, 
        width = 4, height = 5)
@@ -291,14 +290,6 @@ lab_positions <- surface_results %>%
 ### Add Labels
 ```{r tn_graphic_region_no_legend, fig.height = 5, fig.width = 4}
 plt +
-  geom_vline(xintercept = 0.32, color = cbep_colors()[3], lty = 2) +
-  geom_text(aes(x = 0.35, y = 6, label = '0.32'), 
-            angle = 90, hjust = 0, size = 3,
-                color = cbep_colors()[3]) +
-  geom_vline(xintercept = 0.45, color = cbep_colors()[3], lty = 2) +
-  geom_text(aes(x = 0.48, y = 6, label = '0.45'), 
-            angle = 90, hjust = 0, size = 3,
-                color = cbep_colors()[3]) +
   
   theme(legend.position = 'none',
         #plot.margin  = unit(c(8,24,8,8), 'pt')
