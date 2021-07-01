@@ -1,5 +1,5 @@
 ---
-title: "Compare DEP and FOCB Nutrient Data"
+title: "Graphics for DEP and FOCB Nutrient Data"
 author: "Curtis C. Bohlen, Casco Bay Estuary Partnership."
 date: "06/07/2021"
 output:

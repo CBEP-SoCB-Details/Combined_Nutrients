@@ -1,4 +1,4 @@
-Compare DEP and FOCB Nutrient Data
+Graphics for DEP and FOCB Nutrient Data
 ================
 Curtis C. Bohlen, Casco Bay Estuary Partnership.
 06/07/2021
