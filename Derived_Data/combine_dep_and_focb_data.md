@@ -26,7 +26,7 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership.
 
 \#Introduction This repository was created to compare nutrient data
 received from Friends of Casco Bay and from Maine DEP. initially, this
-was to to ensure that we are not double counting nutrient samples. When
+was to ensure that we are not double counting nutrient samples. When
 we discovered that there is little or no sample overlap between the two
 data sources, we extended the archive to combine data from both sources
 into one data set for display purposes.
@@ -192,7 +192,7 @@ surface_data <- mixed_data %>%
 ## Filter Out Data From Sites with Few Samples
 
 We filter out data for each parameter from any sites that did not have
-at least five samples for that parameter since 2015. WE add data on the
+at least five samples for that parameter since 2015. We add data on the
 number of years each site was sampled.
 
 ``` r
