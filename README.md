@@ -69,7 +69,7 @@ graphical layouts.
 # Summary of Data Sources
 Data presented here were shared with CBEP by Friends of Casco Bay and
 Maine's Department of Environmental Protection, via e-mail.  Details of
-sources and when files were recieved, reviewed, and corrected are included in
+sources and when files were received, reviewed, and corrected are included in
 the data repositories where the main source data files were developed, as 
 follows:
 
