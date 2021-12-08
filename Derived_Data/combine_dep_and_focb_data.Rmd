@@ -21,10 +21,10 @@ knitr::opts_chunk$set(fig.align = 'center',
 
 #Introduction
 This repository was created  to compare nutrient data received from Friends 
-of Casco Bay and from Maine DEP.  initially, this was to to ensure that we are 
+of Casco Bay and from Maine DEP.  Initially, this was to ensure that we are 
 not double counting nutrient samples.  When we discovered that there is little
 or no sample overlap between the two data sources, we extended the archive to 
-combine data from both sources  into one data set for display purposes. 
+combine data from both sourcesinto one data set for display purposes. 
 
 There is no "Original_Data" folder for this repository.  All data was derived 
 from sources in "DEP_nutrients" and "FOCB_Nutrients" repositories, and copied 
@@ -116,7 +116,7 @@ surface_data <- mixed_data %>%
 
 ## Filter Out Data From Sites with Few Samples
 We filter out data for each parameter from any sites that did not have at least
-five samples for that parameter since 2015.  WE add data on the number of years 
+five samples for that parameter since 2015.  We add data on the number of years 
 each site was sampled.
 ```{r}
 surface_data <- surface_data %>%
@@ -164,11 +164,11 @@ we can show on the map.  We chose to hold onto all possible sites with at least
 five samples.
 
 # Data Summary
-There are a handful of replicate or near replicate values, or at least samples 
-collected at the same date and site.  Al lare in the FOCB data, and probably only
-represent data nominally collected from different depths (DIN and TN depths were 
-often recorded differently). To address that, we average across all samples
-collected at one site and date by each organization BEFORE we calculate
+There are a handful of replicate or near replicate values, or at least samples
+collected at the same date and site.  Al lare in the FOCB data, and probably
+only represent data nominally collected from different depths (DIN and TN depths
+were often recorded differently). To address that, we average across all samples
+collected at one site and date by each organization **before** we calculate
 descriptive statistics.
 ```{r core_results}
 surface_results <- surface_data %>%

@@ -25,11 +25,11 @@ Curtis C. Bohlen, Casco Bay Estuary Partnership.
     style="position:absolute;top:10px;right:50px;" />
 
 \#Introduction This repository was created to compare nutrient data
-received from Friends of Casco Bay and from Maine DEP. initially, this
-was to to ensure that we are not double counting nutrient samples. When
-we discovered that there is little or no sample overlap between the two
-data sources, we extended the archive to combine data from both sources
-into one data set for display purposes.
+received from Friends of Casco Bay and from Maine DEP. Initially, this
+was to ensure that we are not double counting nutrient samples. When we
+discovered that there is little or no sample overlap between the two
+data sources, we extended the archive to combine data from both
+sourcesinto one data set for display purposes.
 
 There is no “Original\_Data” folder for this repository. All data was
 derived from sources in “DEP\_nutrients” and “FOCB\_Nutrients”
@@ -52,10 +52,11 @@ that these are independent data sources.
 library(tidyverse)
 #> Warning: package 'tidyverse' was built under R version 4.0.5
 #> -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-#> v ggplot2 3.3.3     v purrr   0.3.4
-#> v tibble  3.1.2     v dplyr   1.0.6
-#> v tidyr   1.1.3     v stringr 1.4.0
-#> v readr   1.4.0     v forcats 0.5.1
+#> v ggplot2 3.3.5     v purrr   0.3.4
+#> v tibble  3.1.6     v dplyr   1.0.7
+#> v tidyr   1.1.4     v stringr 1.4.0
+#> v readr   2.1.0     v forcats 0.5.1
+#> Warning: package 'ggplot2' was built under R version 4.0.5
 #> Warning: package 'tidyr' was built under R version 4.0.5
 #> Warning: package 'dplyr' was built under R version 4.0.5
 #> Warning: package 'forcats' was built under R version 4.0.5
@@ -97,33 +98,17 @@ dep_data <- read_csv(file.path(sibling, fn )) %>%
   mutate(source = 'DEP') %>%
   relocate(source) %>%
   pivot_longer(c(din, tn), names_to = 'parameter', values_to = 'concentration')
-#> 
+#> Rows: 497 Columns: 35
 #> -- Column specification --------------------------------------------------------
-#> cols(
-#>   .default = col_logical(),
-#>   site_name = col_character(),
-#>   site = col_character(),
-#>   depth_designation = col_character(),
-#>   dt = col_date(format = ""),
-#>   month = col_character(),
-#>   year = col_double(),
-#>   time = col_time(format = ""),
-#>   hour = col_double(),
-#>   depth = col_double(),
-#>   chl = col_double(),
-#>   phaeo = col_double(),
-#>   nox_n = col_double(),
-#>   nh4_n = col_double(),
-#>   tn = col_double(),
-#>   op_p = col_double(),
-#>   tp = col_double(),
-#>   tss = col_double(),
-#>   `Sample Comments` = col_character(),
-#>   `Validation Comments` = col_character(),
-#>   Latitude = col_double()
-#>   # ... with 1 more columns
-#> )
-#> i Use `spec()` for the full column specifications.
+#> Delimiter: ","
+#> chr   (6): site_name, site, depth_designation, month, Sample Comments, Valid...
+#> dbl  (13): year, hour, depth, chl, phaeo, nox_n, nh4_n, tn, op_p, tp, tss, L...
+#> lgl  (14): chl_cens, chl_flag, phaeo_flag, phaeo_cens, nox_n_cens, nox_n_fla...
+#> date  (1): dt
+#> time  (1): time
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ## FOCB Data
@@ -144,26 +129,15 @@ focb_data <- read_csv(file.path(sibling, fn )) %>%
   mutate(depth = if_else(parameter == 'tn', tn_depth, din_depth)) %>%
   select(-tn_depth, -din_depth) %>%
   relocate(depth , .after = 'dt')
-#> 
+#> Rows: 3324 Columns: 16
 #> -- Column specification --------------------------------------------------------
-#> cols(
-#>   station = col_character(),
-#>   dt = col_datetime(format = ""),
-#>   year = col_double(),
-#>   yearf = col_double(),
-#>   month = col_character(),
-#>   doy = col_double(),
-#>   tn_depth = col_double(),
-#>   din_depth = col_double(),
-#>   tn = col_double(),
-#>   nox = col_double(),
-#>   nh4 = col_double(),
-#>   din = col_double(),
-#>   din_N = col_double(),
-#>   nox_N = col_double(),
-#>   nh4_N = col_double(),
-#>   organic_N = col_double()
-#> )
+#> Delimiter: ","
+#> chr   (2): station, month
+#> dbl  (13): year, yearf, doy, tn_depth, din_depth, tn, nox, nh4, din, din_N, ...
+#> dttm  (1): dt
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ## Combine Data
@@ -192,7 +166,7 @@ surface_data <- mixed_data %>%
 ## Filter Out Data From Sites with Few Samples
 
 We filter out data for each parameter from any sites that did not have
-at least five samples for that parameter since 2015. WE add data on the
+at least five samples for that parameter since 2015. We add data on the
 number of years each site was sampled.
 
 ``` r
@@ -251,7 +225,7 @@ samples collected at the same date and site. Al lare in the FOCB data,
 and probably only represent data nominally collected from different
 depths (DIN and TN depths were often recorded differently). To address
 that, we average across all samples collected at one site and date by
-each organization BEFORE we calculate descriptive statistics.
+each organization **before** we calculate descriptive statistics.
 
 ``` r
 surface_results <- surface_data %>%
